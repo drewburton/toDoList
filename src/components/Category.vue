@@ -10,7 +10,10 @@
 export default {
   name: 'Category',
   props: {
-    category: Object
+    category: {
+      type: Object,
+      required: true
+    }
   }
 }
 </script>

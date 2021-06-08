@@ -9,7 +9,7 @@ const routes = [
     component: ToDo
   },
   {
-    path: '/category',
+    path: '/lists/:id',
     name: 'CategoryInfo',
     props: true,
     component: CategoryInfo

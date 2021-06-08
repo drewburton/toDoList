@@ -9,15 +9,15 @@ import EventService from '@/services/EventService.js'
 
 export default {
   props: ['id'],
-  data() {
+  data () {
     return {
       list: null
     }
   },
-  created() {
-    EventService.getList(id)
-    .then(response => { this.list = response.data})
-    .catch(error => console.log(error))
+  created () {
+    EventService.getList(this.id)
+      .then(response => { this.list = response.data.contents })
+      .catch(error => console.log(error))
   }
 
 }

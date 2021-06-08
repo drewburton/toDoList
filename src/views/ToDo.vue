@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-      <category v-for="category in categories" :key="category.id" :category="category"/>
+      <Category v-for="category in categories" :key="category.id" :category="category"/>
   </div>
 </template>
 
