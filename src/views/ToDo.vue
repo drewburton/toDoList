@@ -7,6 +7,7 @@
 <script>
 // @ is an alias to /src
 import Category from '@/components/Category.vue'
+import EventService from '@/services/EventService.js'
 
 export default {
   name: 'ToDo',
@@ -15,19 +16,13 @@ export default {
   },
   data () {
     return {
-      categories: [
-        {
-          id: '123',
-          title: 'math',
-          contents: ['1', '2', '3']
-        },
-        {
-          id: '456',
-          title: 'science',
-          contents: ['7', '8', '9']
-        }
-      ]
+      categories: null
     }
+  },
+  created() {
+    EventService.getCategories()
+    .then(response => { this.categories = response.data })
+    .catch(error => console.log(error))
   }
 }
 </script>

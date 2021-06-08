@@ -10,10 +10,10 @@ const apiclient = axios.create({
 })
 
 export default {
-    getLists() {
+    getCategories() {
         return apiclient.get('/lists')
     },
     getList(id) {
-        return apliclient.get('/lists/' + id)
+        return apiclient.get('/lists/' + id)
     }
 }
