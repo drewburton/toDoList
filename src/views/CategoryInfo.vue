@@ -2,6 +2,10 @@
     <div v-if="list">
         <h1 v-for="item in list" :key=item> {{ item }} </h1>
     </div>
+
+    <div>
+      <button v-on:click="list.push(1)">Test add button</button>
+    </div>
 </template>
 
 <script>
