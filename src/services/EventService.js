@@ -14,13 +14,16 @@ export default {
     return apiclient.get('/lists')
   },
   getList (id) {
+    console.log('getting /lists/' + id)
     return apiclient.get('/lists/' + id)
   },
   addCategory (category) {
     apiclient.post('/lists', category)
-      .then(response => { console.log(response) })
   },
   removeCategory (id) {
     apiclient.delete('/lists/' + id)
+  },
+  updateList (list, id) {
+    apiclient.patch('/lists/' + id, { content: list })
   }
 }

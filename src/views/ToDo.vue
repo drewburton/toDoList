@@ -36,23 +36,37 @@ export default {
       .catch(error => console.log(error))
   },
   methods: {
+    nextId () {
+      var highestId = 0
+      for (var i = 0; i < this.categories.length; i++) {
+        if (this.categories[i].id > highestId) {
+          highestId = this.categories[i].id
+        }
+      }
+      return highestId + 1
+    },
     addCategory () {
       if (this.categoryText) {
         this.categories.push({
-          id: this.categories.length + 1,
+          id: this.nextId(),
           title: this.categoryText,
           content: [' ']
         })
 
-        // push the information to the database, then clear the text area
         EventService.addCategory(this.categories[this.categories.length - 1])
         this.categoryText = ''
       }
     },
     removeCategory (id) {
-      if (this.categories[id - 1]) {
+      var index = -1
+      for (var i = 0; i < this.categories.length; i++) {
+        if (this.categories[i].id === id) {
+          index = i
+        }
+      }
+      if (index !== -1) {
+        this.categories.splice(index, 1)
         EventService.removeCategory(id)
-        this.categories.splice(id - 1, 1)
       }
     }
   }

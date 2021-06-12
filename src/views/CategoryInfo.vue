@@ -1,30 +1,55 @@
 <template>
-    <div v-if="list">
-        <h1 v-for="item in list" :key=item> {{ item }} </h1>
-    </div>
+  <div class="category-info" v-if="list">
+    <CategoryInfoItem
+      v-for="(item, index) in list"
+      :key="index"
+      :id="index"
+      :contents="item"
+      @removeInfoItem="removeInfo"/>
+  </div>
 
-    <div v-if="list">
-      <button v-on:click="list.push(1)">Test add button</button>
+  <div class="category-add">
+    <textarea v-model="addText"/>
+    <div>
+      <button @click="addInfo">add</button>
     </div>
-    <div v-else>
-      <button @click="list = ['1']">add</button>
-    </div>
+  </div>
 </template>
 
 <script>
 import EventService from '@/services/EventService.js'
+import CategoryInfoItem from '@/components/CategoryInfoItem.vue'
 
 export default {
   props: ['id'],
+  components: {
+    CategoryInfoItem
+  },
   data () {
     return {
-      list: null
+      list: null,
+      addText: ''
     }
   },
   created () {
     EventService.getList(this.id)
       .then(response => { this.list = response.data.contents })
       .catch(error => console.log(error))
+  },
+  methods: {
+    addInfo () {
+      if (this.list) {
+        this.list.push(this.addText)
+        this.addText = ''
+      } else {
+        this.list = [this.addText]
+      }
+      EventService.updateList(this.list, this.id)
+    },
+    removeInfo (id) {
+      this.list.splice(id, 1)
+      EventService.updateList(this.list, this.id)
+    }
   }
 
 }
