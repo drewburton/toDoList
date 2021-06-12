@@ -3,8 +3,11 @@
         <h1 v-for="item in list" :key=item> {{ item }} </h1>
     </div>
 
-    <div>
+    <div v-if="list">
       <button v-on:click="list.push(1)">Test add button</button>
+    </div>
+    <div v-else>
+      <button @click="list = ['1']">add</button>
     </div>
 </template>
 

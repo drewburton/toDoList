@@ -29,9 +29,10 @@ export default {
   padding: 20px;
   border: 1px solid #000000;
   margin-bottom: 18px;
+  transition: all 0.25s ease
 }
 .category:hover {
-  transform: scale(1.01);
+  transform: scale(1.05);
   box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.2);
 }
 h3 {
