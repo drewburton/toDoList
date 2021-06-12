@@ -19,5 +19,8 @@ export default {
   addCategory (category) {
     apiclient.post('/lists', category)
       .then(response => { console.log(response) })
+  },
+  removeCategory (id) {
+    apiclient.delete('/lists/' + id)
   }
 }

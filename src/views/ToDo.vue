@@ -1,6 +1,10 @@
 <template>
   <div class="home">
-      <Category v-for="category in categories" :key="category.id" :category="category"/>
+      <Category
+        v-for="category in categories"
+        :key="category.id"
+        :category="category"
+        @removeCategory="removeCategory"/>
       <div class='add-category'>
         <strong> Add Category </strong>
         <textarea class="add-category-area" v-model="categoryText"/>
@@ -43,6 +47,12 @@ export default {
         // push the information to the database, then clear the text area
         EventService.addCategory(this.categories[this.categories.length - 1])
         this.categoryText = ''
+      }
+    },
+    removeCategory (id) {
+      if (this.categories[id - 1]) {
+        EventService.removeCategory(id)
+        this.categories.splice(id - 1, 1)
       }
     }
   }
